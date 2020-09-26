@@ -28,7 +28,7 @@ After decompressing the file, you would see this folder.
 
 
 # Benchmark
-We take attemp
+
 <div style="text-align:center">
 <img src="cosda/image/benchmark.png" alt="" width="1100" height="200"/>
 </div>
