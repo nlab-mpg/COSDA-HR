@@ -20,4 +20,4 @@ COSDA, specifically designed for (C)ontinual (O)pen-(S)et (D)omain (A)daptation.
 
 # Benchmark
 
-<img src="cosda/image/benchmark.png" alt="" width="700" height="200"/>
+<img src="cosda/image/benchmark.png" alt="" width="900" height="200"/>
