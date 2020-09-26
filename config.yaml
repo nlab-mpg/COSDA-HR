@@ -1,0 +1,41 @@
+data:
+  dataset:
+    name: cosda # choices are ['office', 'officehome', 'caltech-imagenet', 'visda2017']
+    root_path: '' # /path/to/dataset/root
+    source: 0 # source domain index
+    target: 1 # target domain index
+    target_val: 2 # target domain index
+    n_share: 160 # number of classes to be shared
+    n_source_private: 0 # number of classes in source private domain
+    n_total: 161 # number of classes in total
+
+  dataloader:
+    class_balance: true #
+    data_workers: 20 # how many workers to use for train dataloaders
+    batch_size: 32 # batch_size for source domain and target domain respectively
+
+model:
+  base_model: resnet18 # choices=['resnet18', 'vgg16']
+
+train:
+  min_step: 30000 # minimum steps to run. run epochs until it exceeds the minStep
+  lr: 0.001 # learning rate for new layers. learning rate for finetune is 1/10 of lr
+  momentum: 0.9
+  weight_decay: 0.0005
+
+
+test:
+  test_interval: 1500 # interval of two continuous test phase
+  test_only: False # test a given model and exit
+  resume_file: '' # model to test
+  w_0: 0.45 # hyper-parameter w_0
+
+misc:
+  gpus: 2 # how many GPUs to be used, 0 indicates CPU only
+  episode_per_epoch: 4
+  val_flag: 1
+  val_size: 0.1
+
+log:
+  root_dir: log_0.45 # the log directory (log directory will be {root_dir}/{method}/time/)
+  log_interval: 10 # steps to log scalars
