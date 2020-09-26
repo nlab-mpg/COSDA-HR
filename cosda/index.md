@@ -4,7 +4,7 @@ The object recognition ability is indispensable for robotsto act like humans in 
 
 
 # How to download?
-
+Click "Download .tar.gz" button to download the dataset.
 
 
 # How to use?
