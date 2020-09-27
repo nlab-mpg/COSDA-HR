@@ -4,6 +4,9 @@ import torch.nn.functional as F
 from torchvision.models import resnet18, resnet50, resnet34, resnet101, resnet152, densenet121, densenet161, resnext101_32x8d, wide_resnet101_2, resnext50_32x4d, wide_resnet50_2
 from config import *
 from data import *
+import random
+
+
 
 class BaseFeatureExtractor(nn.Module):
     def forward(self, *input):
@@ -266,8 +269,6 @@ class AdversarialNetwork(nn.Module):
 
 
 
-
-
 model_dict = {
     'resnet34': ResNet34Fc,
     'resnet18': ResNet18Fc,
@@ -280,16 +281,12 @@ model_dict = {
     'wideresnet101': WideResNet101Fc,
     'resnext101': ResNext101Fc,
     'resnext50': ResNext50Fc,
-    
-    #  'resnext': ResNext101Fc,
     'vgg16': VGG16Fc
 }
 
-
-
 class TotalNet(nn.Module):
 
-    def __init__(self):
+    def __init__(self, source_classes):
         super(TotalNet, self).__init__()
         self.feature_extractor = model_dict[args.model.base_model]()
         classifier_output_dim = len(source_classes)
@@ -303,3 +300,55 @@ class TotalNet(nn.Module):
         d = self.discriminator(_)
         d_0 = self.discriminator_separate(_)
         return y, d, d_0
+
+
+
+# BIC layers
+class BiasLayer(nn.Module):
+    def __init__(self):
+        super(BiasLayer, self).__init__()
+        self.alpha = nn.Parameter(torch.ones(1, requires_grad=True, device="cuda:0"))
+        self.beta = nn.Parameter(torch.zeros(1, requires_grad=True, device="cuda:0"))
+    def forward(self, x):
+        return self.alpha * x + self.beta
+    def printParam(self, i):
+        print(i, self.alpha.item(), self.beta.item())
+
+
+
+def bias_forward(input, bias_layers, episode_length, num_class):
+    inputs = [input[:, i*(num_class // episode_length):(i+1)*(num_class // episode_length)] for i in range(num_class)]
+    outs = [bias_layers[i](inputs[i]) for i in range(episode_length)]
+    return torch.cat(outs, dim = 1)
+
+
+# Update network memory
+def update_memory(memory, dl, memory_size=1800):
+    memory_t = set(memory.dataset.labels)
+    dl_t = set(dl.dataset.labels)
+    dl.dataset.labels = list(dl.dataset.labels)
+    if len(dl_t.difference(memory_t)) == 0:
+        return memory
+    else:
+        unique_data = list(set([(p,t) for p,t in zip(memory.dataset.datas, memory.dataset.labels)] + [(p,t) for p,t in zip(dl.dataset.datas, dl.dataset.labels)]))
+        #  print(memory.dataset.labels)
+        categorized_unique_data = {i: [] for i in list(set(memory.dataset.labels + dl.dataset.labels))}
+        for p, t in unique_data:
+            categorized_unique_data[t].append(p)
+        num_per_class = int(memory_size / len(set(memory.dataset.labels + dl.dataset.labels)))
+        datas, labels = [], []
+        for t in list(set(memory.dataset.labels + dl.dataset.labels)):
+            tmp = categorized_unique_data[t]
+            random.shuffle(tmp)
+            tmp = tmp[:num_per_class]
+            datas.extend(tmp)
+            labels.extend([t] * len(tmp))
+        memory.dataset.datas, memory.dataset.labels = datas, labels
+
+def get_model(gpu_ids, source_classes):
+    totalNet = TotalNet(source_classes)
+    feature_extractor = nn.DataParallel(totalNet.feature_extractor, device_ids=gpu_ids).cuda()
+    classifier = nn.DataParallel(totalNet.classifier, device_ids=gpu_ids).cuda()
+    discriminator = nn.DataParallel(totalNet.discriminator, device_ids=gpu_ids).cuda()
+    discriminator_separate = nn.DataParallel(totalNet.discriminator_separate, device_ids=gpu_ids).cuda()
+    return totalNet, feature_extractor, classifier, discriminator, discriminator_separate

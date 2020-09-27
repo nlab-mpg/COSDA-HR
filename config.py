@@ -53,8 +53,8 @@ if args.data.dataset.name == 'cosda':
         './sequential_target/target_list_7.txt', # 16
         './sequential_target/target_list_8.txt', # 17
         './sequential_target/target_list_9.txt', # 18
-        './evaluation_list.txt', # 20
-        './source_eval_list.txt', # 21
+        './eval/evaluation_list.txt', # 20
+        './eval/source_eval_list.txt', # 21
     ],
     prefix=args.data.dataset.root_path)
     dataset.prefixes = [dataset.path, dataset.path]
