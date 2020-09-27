@@ -17,16 +17,14 @@ Click [Download .tar.gz] button to download the dataset.
 
 
 # How to use?
-After decompressing the file, you would see this folder.
-
+After decompressing the file, you would see these folders.
 ```
-data/<br/>
-    |----train<br/>
-    |----train_target_infer<br/>
-    |----val&nbsp;
-    |----val_target_infer<br/>
+data/
+    |----train
+    |----train_target_infer
+    |----val
+    |----val_target_infer
 ```
-
 
 **train**:
 
@@ -39,5 +37,5 @@ data/<br/>
 # Benchmark
 
 <div style="text-align:center">
-<img src="cosda/image/benchmark.png" alt="" width="1100" height="200"/>
+<img src="cosda/image/benchmark.png" alt="" width="1100" height="140"/>
 </div>
