@@ -19,11 +19,14 @@ Click [Download .tar.gz] button to download the dataset.
 # How to use?
 After decompressing the file, you would see this folder.
 
-```data/&nbsp;
-    |----train&nbsp;
-    |----train_target_infer&nbsp;
+```
+data/<br/>
+    |----train<br/>
+    |----train_target_infer<br/>
     |----val&nbsp;
-    |----val_target_infer&nbsp;```
+    |----val_target_infer<br/>
+```
+
 
 **train**:
 
