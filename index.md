@@ -20,10 +20,10 @@ Click [Download .tar.gz] button to download the dataset.
 After decompressing the file, you would see this folder.
 
 `data/
-   |----train
-   |----train_target_infer
-   |----val
-   |----val_target_infer
+    |----train
+    |----train_target_infer
+    |----val
+    |----val_target_infer
    `
 
 
