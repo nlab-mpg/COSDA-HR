@@ -25,7 +25,13 @@ After decompressing the file, you would see this folder.
     |----val&nbsp;
     |----val_target_infer&nbsp;
    `
+**train**:
 
+**train_target_infer**:
+
+**val**:
+
+**val_target_infer**:
 
 # Benchmark
 
