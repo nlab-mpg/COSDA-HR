@@ -40,13 +40,12 @@ class SequentialLoader(object):
 
 
 
-    def split(self, train, val, val_size=0.1, seed=123):
+    def split(self, train, val, val_size=0.1):
         train_imgs, train_labels, val_imgs, val_labels = [], [], [], []
         for t in list(set(train.dataset.labels)):
             index = list(np.where(np.array(train.dataset.labels) == t))[0]
             num_of_exapmples = int(val_size * len(index))
             import random
-            random.seed(seed)
             random.shuffle(index)
             train_imgs.extend(np.array(train.dataset.datas)[index[:]].tolist())
             train_labels.extend(np.array(train.dataset.labels)[index[:]].tolist())
