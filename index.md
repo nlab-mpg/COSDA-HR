@@ -63,28 +63,7 @@ data/
      |- ...
 ```
 
-"""
-    This data was taken from no_annotation_avi data on GoogleDrive
-"""
 
-All inference was using the parameters which was tuned on
-the pattern1 and pattern2_night.
-
-################################
-
-result on tuning (pattern1 and pattern2_night)
-    mean_iou  : 0.7273772954940796
-    precision : 0.015073592437489286
-    recall    : 0.96696452748443
-
-IoU was calculated only on matched GT bbox.
-Precision was calculated by (GT bbox)/(pred bbox including matched bbox).
-Recall was calculate by (matched bbox)/(GT bbox).
-
-bbox matching was done by thresholding iou >= 0.5 and best IoU.
-
-################################
-image name : <original_image_name>_<detection_num>.png styled.
 
 
 **val**:
