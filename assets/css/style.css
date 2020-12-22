@@ -1,6 +1,9 @@
 ---
 ---
-  
+$header-bg-color: #FF0000;
+$header-bg-color-secondary: #FF0000;
+$section-headings-color: #FF0000;
+
 @import "{{ site.theme }}";
 .center {
 display: block;
