@@ -1,4 +1,4 @@
-# What is COSDA(1)?
+# What is COSDA?
 
 The object recognition ability is indispensable for robotsto act like humans in a home environment. For example, when considering an object searching task, humans can recognize a naturally arranged object previously held intheir hands while ignoring never observed objects. Even in such a simple task, we need to deal with three complex problems: **Domain Adaptation**, **Open-Set Recognition**, and **Continual Learning**. However, most existing datasets are simplified to focus on one problem and do not measure the object recognition ability for home robots when multiple problems are mixed in. We propose a Continual Open Set Domain Adaptation (COSDA) Dataset that requires dealing with the above three problems simultaneously.
 
