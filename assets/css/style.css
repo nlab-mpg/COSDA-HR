@@ -1,7 +1,8 @@
 ---
 ---
 
-$brand-color:  #FF0000;
+$header-bg-color-secondary:FFFFFF;
+$header-bg-color:FF0000;
 
 @import "{{ site.theme }}";
 .center {
