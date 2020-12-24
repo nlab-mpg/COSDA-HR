@@ -109,7 +109,7 @@ a {
   color: $header-heading-color;
   text-align: center;
   background-color: $header-bg-color;
-  background-image: linear-gradient(to bottom, $header-bg-color-secondary 60%, $header-bg-color);
+  background-image: linear-gradient(to bottom, $header-bg-color-secondary 45%, $header-bg-color);
 
   @include large {
     padding: 5rem 6rem;
