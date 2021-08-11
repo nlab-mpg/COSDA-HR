@@ -1,7 +1,8 @@
 from easydl import *
 from torchvision import models
 import torch.nn.functional as F
-from torchvision.models import resnet18, resnet50, resnet34, resnet101, resnet152, densenet121, densenet161, resnext101_32x8d, wide_resnet101_2, resnext50_32x4d, wide_resnet50_2
+# from torchvision.models import resnet18, resnet50, resnet34, resnet101, resnet152, densenet121, densenet161, resnext101_32x8d, wide_resnet101_2, resnext50_32x4d, wide_resnet50_2
+from torchvision.models import resnet18, resnet50, resnet34, resnet101, resnet152, densenet121, densenet161
 from config import *
 from data import *
 import random
@@ -109,63 +110,63 @@ class DenseNet161Fc(nn.Module):
         return self.__in_features
 
 
-class ResNext101Fc(nn.Module):
-    def __init__(self):
-        super(ResNext101Fc, self).__init__()
-        self.resnet = resnext_101_32x8d(pretrained=True)
-        self.__in_features = self.resnet.classifier.in_features
-        self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
-    def forward(self, x):
-        res = self.resnet(x)
-        # res = F.avg_pool2d(res, 7)
-        res = res.view(res.size(0), -1)
-        return res
-    def output_num(self):
-        return self.__in_features
-
-class ResNext50Fc(nn.Module):
-    def __init__(self):
-        super(ResNext50Fc, self).__init__()
-        self.resnet = resnext50_32x4d(pretrained=True)
-        self.__in_features = self.resnet.classifier.in_features
-        self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
-    def forward(self, x):
-        res = self.resnet(x)
-        # res = F.avg_pool2d(res, 7)
-        res = res.view(res.size(0), -1)
-        return res
-    def output_num(self):
-        return self.__in_features
-
-
-class WideResNet50Fc(nn.Module):
-    def __init__(self):
-        super(WideResNet50Fc, self).__init__()
-        self.resnet = wide_resnet50_2(pretrained=True)
-        self.__in_features = self.resnet.classifier.in_features
-        self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
-    def forward(self, x):
-        res = self.resnet(x)
-        # res = F.avg_pool2d(res, 7)
-        res = res.view(res.size(0), -1)
-        return res
-    def output_num(self):
-        return self.__in_features
+# class ResNext101Fc(nn.Module):
+#     def __init__(self):
+#         super(ResNext101Fc, self).__init__()
+#         self.resnet = resnext_101_32x8d(pretrained=True)
+#         self.__in_features = self.resnet.classifier.in_features
+#         self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
+#     def forward(self, x):
+#         res = self.resnet(x)
+#         # res = F.avg_pool2d(res, 7)
+#         res = res.view(res.size(0), -1)
+#         return res
+#     def output_num(self):
+#         return self.__in_features
+#
+# class ResNext50Fc(nn.Module):
+#     def __init__(self):
+#         super(ResNext50Fc, self).__init__()
+#         self.resnet = resnext50_32x4d(pretrained=True)
+#         self.__in_features = self.resnet.classifier.in_features
+#         self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
+#     def forward(self, x):
+#         res = self.resnet(x)
+#         # res = F.avg_pool2d(res, 7)
+#         res = res.view(res.size(0), -1)
+#         return res
+#     def output_num(self):
+#         return self.__in_features
 
 
-class WideResNet101Fc(nn.Module):
-    def __init__(self):
-        super(WideResNet101Fc, self).__init__()
-        self.resnet = wide_resnet101_2(pretrained=True)
-        self.__in_features = self.resnet.classifier.in_features
-        self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
-    def forward(self, x):
-        res = self.resnet(x)
-        # res = F.avg_pool2d(res, 7)
-        res = res.view(res.size(0), -1)
-        return res
-    def output_num(self):
-        return self.__in_features
+# class WideResNet50Fc(nn.Module):
+#     def __init__(self):
+#         super(WideResNet50Fc, self).__init__()
+#         self.resnet = wide_resnet50_2(pretrained=True)
+#         self.__in_features = self.resnet.classifier.in_features
+#         self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
+#     def forward(self, x):
+#         res = self.resnet(x)
+#         # res = F.avg_pool2d(res, 7)
+#         res = res.view(res.size(0), -1)
+#         return res
+#     def output_num(self):
+#         return self.__in_features
+#
+#
+# class WideResNet101Fc(nn.Module):
+#     def __init__(self):
+#         super(WideResNet101Fc, self).__init__()
+#         self.resnet = wide_resnet101_2(pretrained=True)
+#         self.__in_features = self.resnet.classifier.in_features
+#         self.resnet = nn.Sequential(*list(self.resnet.children())[:-1])
+#     def forward(self, x):
+#         res = self.resnet(x)
+#         # res = F.avg_pool2d(res, 7)
+#         res = res.view(res.size(0), -1)
+#         return res
+#     def output_num(self):
+#         return self.__in_features
 
 
 
@@ -277,10 +278,10 @@ model_dict = {
     'resnet152': ResNet152Fc,
     'densenet121': DenseNet121Fc,
     'densenet161': DenseNet161Fc,
-    'wideresnet50':WideResNet50Fc,
-    'wideresnet101': WideResNet101Fc,
-    'resnext101': ResNext101Fc,
-    'resnext50': ResNext50Fc,
+    # 'wideresnet50':WideResNet50Fc,
+    # 'wideresnet101': WideResNet101Fc,
+    # 'resnext101': ResNext101Fc,
+    # 'resnext50': ResNext50Fc,
     'vgg16': VGG16Fc
 }
 
@@ -344,6 +345,7 @@ def update_memory(memory, dl, memory_size=1800):
             datas.extend(tmp)
             labels.extend([t] * len(tmp))
         memory.dataset.datas, memory.dataset.labels = datas, labels
+
 
 def get_model(gpu_ids, source_classes):
     totalNet = TotalNet(source_classes)
