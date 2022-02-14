@@ -1,5 +1,5 @@
 # COSDA-HR
-[Continual Open Set Domain Adaptation Towards Object Recognition For Home Robot](https://nlab-mpg.github.io/COSDA-HR/)
+[Continual Object Recognition With Continual Open Set Domain Adaptation for Home Robot](https://nlab-mpg.github.io/COSDA-HR/)
 
 # Setup
 1. Download COSDA-HR dataset from [here](https://drive.google.com/file/d/1Fc0MJtJT5lNNpt7S65BCeLSjg7Z1jrQ1/view?usp=sharing)
